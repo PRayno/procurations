@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SecteurDisciplinaire{% endblock %}
+
+{% block body %}
+    <h2>Ajout d'un nouveau secteur disciplinaire</h2>
+
+    {{ include('secteur_disciplinaire/_form.html.twig') }}
+
+    <a href="{{ path('secteur_disciplinaire_index') }}" class="button button-uca-beige">Retour à la liste</a>
+{% endblock %}

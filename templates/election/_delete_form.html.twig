@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('election_delete', {'id': election.id}) }}" onsubmit="return confirm('Vraiment supprimer cette élection (ainsi que les scrutins et procurations associés)?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ election.id) }}">
+    <button class="button button-red">Supprimer</button>
+</form>

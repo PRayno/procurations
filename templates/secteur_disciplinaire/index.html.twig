@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Secteurs disciplinaires{% endblock %}
+
+{% block body %}
+
+    <h2>Secteurs disciplinaires</h2>
+
+    <a href="{{ path('secteur_disciplinaire_new') }}" class="button button-uca-blue">Ajouter un secteur disciplinaire</a>
+
+    {% if secteur_disciplinaires|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Actif</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for secteur_disciplinaire in secteur_disciplinaires %}
+                <tr>
+                    <td>{{ secteur_disciplinaire.nom }}</td>
+                    <td>{{ secteur_disciplinaire.actif ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        <a href="{{ path('secteur_disciplinaire_edit', {'id': secteur_disciplinaire.id}) }}" class="button button-uca-beige">Editer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-red">Aucun secteur disciplinaire renseigné.</div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% if not scrutin %}
+Numéro;Election;Scrutin;Collège Electoral;Secteur disciplinaire;Mandant;Mandataire;Date;Lieu
+{% for procuration in procurations %}
+"{{ procuration.number }}";"{{ procuration.scrutin.election }}";"{{ procuration.scrutin }}";"{{ procuration.college }}";"{{ procuration.secteurDisciplinaire }}";"{{ procuration.prenom ~ ' ' ~ procuration.nom }}";"{{ procuration.mandataire }}";"{{ procuration.date|date('d/m/Y H:m') }}";"{{ procuration.lieu }}"
+{% endfor %}
+{% else %}
+Numéro;Collège Electoral;Secteur disciplinaire;Mandant;Mandataire;Date;Lieu
+{% for procuration in procurations %}
+"{{ procuration.number }}";"{{ procuration.college }}";"{{ procuration.secteurDisciplinaire }}";"{{ procuration.prenom ~ ' ' ~ procuration.nom }}";"{{ procuration.mandataire }}";"{{ procuration.date|date('d/m/Y H:m') }}";"{{ procuration.lieu }}"
+{% endfor %}
+{% endif %}

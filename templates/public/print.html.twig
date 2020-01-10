@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.uca.fr/css/uca.min.20181030.css">
+
+    <style>
+        h2 {
+            margin-bottom: 0px
+        }
+        h2::before {
+            content: none
+        }
+        h4 {
+            color: #5E5C5C
+        }
+
+        .col-print-1 {width:8%;  float:left;}
+        .col-print-2 {width:16%; float:left;}
+        .col-print-3 {width:25%; float:left;}
+        .col-print-4 {width:33%; float:right;}
+        .col-print-5 {width:42%; float:right;}
+        .col-print-6 {width:50%; float:left;}
+        .col-print-7 {width:58%; float:right;}
+        .col-print-8 {width:66%; float:left;}
+        .col-print-9 {width:75%; float:left;}
+        .col-print-10{width:83%; float:left;}
+        .col-print-11{width:92%; float:left;}
+        .col-print-12{width:100%; float:left;}
+    </style>
+
+    <title>Procuration</title>
+</head>
+<body class="bg-white">
+<div class="container">
+    <div class="row">
+        <div class="col-print-2 pt-2">
+            <img src="https://cdn.uca.fr/images/logos/logo_uca_carre_100.png" alt="">
+        </div>
+        <div class="col-print-7 offset-xs-6 text-center pt-2">
+            <div class="text-right">{{ procuration.number }}</div>
+            <h2>PROCURATION</h2>
+            <h4>{{ procuration.scrutin.election.nom }} - {{ procuration.scrutin.nom }}</h4>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+
+    <p class="text-justify mt-5">Le mandataire doit être inscrit sur <strong>la même liste électorale</strong> que la personne qui donne procuration (mandant). La procuration n'est valable que pour un même collège.</p>
+    <p class="text-justify mb-5">Le mandataire doit remettre au bureau de vote la <strong>procuration originale</strong> signée par le mandant et présenter, selon le cas, soit la carte d'étudiant, soit une pièce d'identité du mandant.</p>
+
+    {% if procuration.scrutin.explications %}
+        <p><strong>Informations supplémentaires sur le scrutin:</strong></p>
+        <p class="text-justify mb-5">{{ procuration.scrutin.explications|nl2br|raw }}</p>
+    {% endif %}
+
+    <p><strong>Je soussigné(e) : </strong> <em>{{ procuration.prenom }} {{ procuration.nom }}</em></p>
+    <p><strong>Courriel :</strong> <em>{{ procuration.mail }}</em></p>
+    <p><strong>Dans le collège :</strong> <em>{{ procuration.college }}</em></p>
+    <p class="mb-5"><strong>Dans le secteur disciplinaire :</strong> <em>{{ procuration.secteurDisciplinaire }}</em></p>
+
+    <p><strong>Empêché(e) de voter personnellement, donne, par la présente, procuration à :</strong></p>
+
+    <p class="mt-3"><strong>Nom et Prénom du mandataire : </strong> <em>{{ procuration.mandataire }}</em></p>
+    <strong>Inscrit(e) sur la même liste électorale (conseil, collège, secteur disciplinaire et lieu de vote).</strong>
+    <p class="mt-5">Fait à : {{ procuration.lieu }}</p>
+    <p>Le {{ procuration.date|date("d/m/Y") }}</p>
+    <div class="row mb-5">
+        <div class="col-4 offset-8 text-right">
+            <strong>Signature du mandant</strong><br>
+            <em>"Bon pour mandat ou procuration"</em>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<div class="row scrutin">
+    <div class="form-group row col-11">
+        {#<div class="col-11">#}
+        {{ form_label(scrutin.nom) }}
+        <span class="col-10">{{ form_widget(scrutin.nom) }} {{ form_errors(scrutin.nom) }}</span>
+        {{ form_label(scrutin.colleges) }}
+        <span class="col-10">{{ form_widget(scrutin.colleges) }} {{ form_errors(scrutin.colleges) }}</span>
+        {{ form_label(scrutin.secteurs) }}
+        <span class="col-10">{{ form_widget(scrutin.secteurs) }} {{ form_errors(scrutin.secteurs) }}</span>
+        {{ form_label(scrutin.explications) }}
+        <span class="col-10">{{ form_widget(scrutin.explications) }} {{ form_errors(scrutin.explications) }}</span>
+    </div>
+    <span class="col-sm-1 line_scrutin"><a href="#" class="button button-uca-beige remove_scrutin">X</a></span>
+    <hr/>
+</div>
+<script>
+    jQuery(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>

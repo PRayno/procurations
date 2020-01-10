@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('secteur_disciplinaire_delete', {'id': secteur_disciplinaire.id}) }}" onsubmit="return confirm('Vraiment supprimer ce secteur disciplinaire ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ secteur_disciplinaire.id) }}">
+    <button class="button button-red">Supprimer</button>
+</form>

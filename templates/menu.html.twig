@@ -1,0 +1,6 @@
+<div class="tabs">
+    <a href="{{ path('public_index') }}" {% if 'procuration_' in app.request.get('_route') or app.request.get('_route') in ['public_create', 'public_index']%}class="active"{% endif %}>Procurations</a>
+    <a href="{{ path('election_index') }}" {% if 'election_' in app.request.get('_route') %}class="active"{% endif %}>Elections</a>
+    <a href="{{ path('college_index') }}" {% if 'college_' in app.request.get('_route') %}class="active"{% endif %}>Collèges électoraux</a>
+    <a href="{{ path('secteur_disciplinaire_index') }}" {% if 'secteur_disciplinaire_' in app.request.get('_route') %}class="active"{% endif %}>Secteurs disciplinaires</a>
+</div>

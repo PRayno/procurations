@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    <fieldset>
+        <legend>Période de procuration</legend>
+        {{ form_row(form.debut) }}
+        {{ form_row(form.fin) }}
+    </fieldset>
+    <fieldset>
+        <legend>Scrutins</legend>
+        {{ form_label(form.scrutins) }}
+        <a href="#" id="add_scrutin" class="pull-right">Ajouter un scrutin</a>
+        <div id="scrutins" data-index="{{ form.scrutins|length }}" data-prototype="{{ include('scrutin/_form.html.twig', { 'scrutin' : form.scrutins.vars.prototype })|escape }}">
+            {% if form.scrutins|length > 0 %}
+                {% for scrutin in form.scrutins %}
+                    <div class="row scrutin">
+                        <div class="form-group row col-11">
+                            {{ form_label(scrutin.nom) }}
+                            <span class="col-10">{{ form_widget(scrutin.nom) }} {{ form_errors(scrutin.nom) }}</span>
+                            {{ form_label(scrutin.colleges) }}
+                            <span class="col-10">{{ form_widget(scrutin.colleges) }} {{ form_errors(scrutin.colleges) }}</span>
+                            {{ form_label(scrutin.secteurs) }}
+                            <span class="col-10">{{ form_widget(scrutin.secteurs) }} {{ form_errors(scrutin.secteurs) }}</span>
+                            {{ form_label(scrutin.explications) }}
+                            <span class="col-10">{{ form_widget(scrutin.explications) }} {{ form_errors(scrutin.explications) }}</span>
+                        </div>
+                        <span class="col-sm-1 line_scrutin"><a href="#" class="button button-uca-beige remove_scrutin">X</a></span>
+                    </div>
+                    <hr/>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </fieldset>
+{{ form_end(form) }}

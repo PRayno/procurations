@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des procurations{% endblock %}
+
+{% block body %}
+    <h2>Liste des procurations</h2>
+
+    {% if procurations|length > 0 %}
+        <a href="{{ path('procuration_export') }}" class="float-right button button-uca-download">Exporter les procurations</a><br/>
+
+        <p><strong>{{ procurations|length }} procuration(s) ont été effectuées.</strong></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Election</th>
+                    <th>Scrutin</th>
+                    <th>Collège électoral</th>
+                    <th>Secteur disciplinaire</th>
+                    <th>Mandant</th>
+                    <th>Mandataire</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for procuration in procurations %}
+                <tr>
+                    <td>{{ procuration.number }}</td>
+                    <td>{{ procuration.scrutin.election }}</td>
+                    <td>{{ procuration.scrutin }}</td>
+                    <td>{{ procuration.college }}</td>
+                    <td>{{ procuration.secteurDisciplinaire }}</td>
+                    <td>{{ procuration.prenom ~ ' ' ~ procuration.nom }}</td>
+                    <td>{{ procuration.mandataire }}</td>
+                    <td>{{ procuration.date ? procuration.date|date('d/m/Y H:i') : '' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-red">Aucune procuration.</div>
+    {% endif %}
+{% endblock %}

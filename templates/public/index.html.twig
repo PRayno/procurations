@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Procurations de vote{% endblock %}
+{% block titre %}Procurations de vote{% endblock %}
+
+{% block body %}
+{% if elections is empty %}
+<div class="alert alert-orange card-80 text-center">
+    Vous ne pouvez pas encore donner de procuration pour une prochaine élection
+</div>
+{% endif %}
+
+
+{% if is_granted('ROLE_ADMIN') %} <a href="{{ path('procuration_index') }}" class="button button-uca-beige float-right" >Consulter toutes les procurations</a>{% endif %}
+{% for election in elections %}
+<div>
+    <h2>{{ election.nom }}</h2>
+    <h6 class="text-muted">procurations possible du {{ election.debut|date("d/m/Y H:i") }} au {{ election.fin|date("d/m/Y H:i") }}</h6>
+    <div class="row">
+        {% for scrutin in election.scrutins %}
+        <div class="col-sm-4">
+            <div class="card">
+                <h5 class="card-title">{{ scrutin.nom }}</h5>
+                {% if procurations[scrutin.id] is defined %}
+                    <ul>
+                        {% for procuration in procurations[scrutin.id] %}
+                            <li>
+                                Procuration au bénéfice de {{ procuration.mandataire }} <br/>
+                                <p style="text-align: center;">
+                                    <a href="{{ path('public_print',{'procuration':procuration.id}) }}">Imprimer</a>
+                                    {% if procuration.printed == false %}-
+                                    <a href="{{ path('public_cancel',{'procuration':procuration.id}) }}" onclick="return confirm('Voulez-vous vraiment annuler cette procuration?');">Annuler la procuration</a>
+                                    {% endif %}
+                                </p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <a href="{{ path('public_create',{'scrutin':scrutin.id}) }}" class="button button-uca-blue">Donner procuration</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

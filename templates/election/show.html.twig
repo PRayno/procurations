@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Election{% endblock %}
+
+{% block body %}
+    <h2>Election</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ election.nom }}</td>
+            </tr>
+            <tr>
+                <th>Début de la période pour les procurations</th>
+                <td>{{ election.debut ? election.debut|date('d/m/Y H:i') : '-' }}</td>
+            </tr>
+            <tr>
+                <th>Fin de la période pour les procurations</th>
+                <td>{{ election.fin ? election.fin|date('d/m/Y H:i') : '-' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if election.scrutins|length > 0 %}
+    <fieldset>
+        <legend>Scrutins</legend>
+        <ul>
+            {% for scrutin in election.scrutins %}
+                <li>
+                    <fieldset>
+                        <legend>{{ scrutin.nom }}</legend>
+                            <dl>
+                                <dd>Collèges électoraux concernés </dd>
+                                <dt>{{ scrutin.colleges|join(', ')|default('-') }}</dt>
+                                <dd>Secteurs disciplinaires concernés </dd>
+                                <dt>{{ scrutin.secteurs|join(', ')|default('-') }}</dt>
+                                <dd>Informations/explications supplémentaires</dd>
+                                <dt>{{ scrutin.explications|default('-')|nl2br|raw }}</dt>
+                            </dl>
+                    </fieldset>
+                   {% if scrutin.procurations|length > 0 %}
+                       <p><a href="{{ path('procuration_list', { 'id' : scrutin.id }) }}">Voir les procurations pour ce scrutin</a></p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    {% else %}
+        <p>Pas de scrutin pour cette élection...</p>
+    {% endif %}
+
+
+    <a href="{{ path('election_index') }}" class="button button-uca-beige">Retour à la liste</a>
+
+    <a href="{{ path('election_edit', {'id': election.id}) }}" class="button button-uca-beige">Modifier</a>
+
+    {{ include('election/_delete_form.html.twig') }}
+{% endblock %}

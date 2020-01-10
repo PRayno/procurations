@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une procuration{% endblock %}
+{% block titre %}Créer une procuration{% endblock %}
+
+
+{% block body %}
+<div class="container border border-dark mt-2 bg-white pb-5">
+    <div class="row">
+        <div class="col-2 pt-2">
+            <img src="https://cdn.uca.fr/images/logos/logo_uca_carre_100.png" alt="">
+        </div>
+        <div class="col-4 offset-6 text-center pt-2">
+            <h2>PROCURATION</h2>
+            <h4>{{ scrutin.election.nom }} - {{ scrutin.nom }}</h4>
+        </div>
+    </div>
+
+    <p class="text-justify mt-5">Le mandataire doit être inscrit sur <strong>la même liste électorale</strong> que la personne qui donne procuration (mandant). La procuration n'est valable que pour un même collège.</p>
+    <p class="text-justify mb-5">Le mandataire doit remettre au bureau de vote la <strong>procuration originale</strong> signée par le mandant et présenter, selon le cas, soit la carte d'étudiant, soit une pièce d'identité du mandant.</p>
+
+    {% if scrutin.explications %}
+        <p><strong>Informations supplémentaires sur le scrutin:</strong></p>
+        <p class="text-justify mb-5">{{ scrutin.explications|nl2br|raw }}</p>
+    {% endif %}
+
+    {{ form_start(form) }}
+    <p><strong>Je soussigné(e) : </strong> <em>{{ user.firstname }} {{ user.lastname }}</em></p>
+    <p><strong>Courriel :</strong> <em>{{ user.mail }}</em></p>
+    <p><strong>Dans le collège :</strong> <em>{{ form_widget(form.college) }}</em></p>
+    <p class="mb-5"><strong>Dans le secteur disciplinaire :</strong> <em>{{ form_widget(form.secteurDisciplinaire) }}</em></p>
+
+    <p><strong class="">Empêché(e) de voter personnellement, donne, par la présente, procuration à :</strong></p>
+
+    <p class="mt-2">Nom et Prénom du mandataire : </strong>{{ form_widget(form.mandataire) }}</p>
+    <strong>Inscrit(e) sur la même liste électorale (conseil, collège, secteur disciplinaire et lieu de vote).</strong>
+    <p class="mt-5">Fait à : {{ form_widget(form.lieu) }}</p>
+    <p>Le {{ "now"|date("d/m/Y") }}</p>
+    <div class="row mb-5">
+        <div class="col-4 offset-8 text-right">
+            <strong>Signature du mandant</strong><br>
+            <em>"Bon pour mandat ou procuration"</em>
+        </div>
+    </div>
+    <div class="text-center"><button type="submit" class="button button-uca-blue w-75">Imprimer cette procuration</div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
+{% block stylesheets %}
+<style>
+    .form-control {
+        display: inline;
+        width: 50%;
+    }
+    h2::before {
+        content: none
+    }
+</style>
+{% endblock %}

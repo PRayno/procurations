@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Procuration{% endblock %}
+
+{% block body %}
+    <h1>Procuration</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ procuration.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ procuration.username }}</td>
+            </tr>
+            <tr>
+                <th>Mandataire</th>
+                <td>{{ procuration.mandataire }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ procuration.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ procuration.date ? procuration.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('procuration_index') }}">back to list</a>
+
+    <a href="{{ path('procuration_edit', {'id': procuration.id}) }}">edit</a>
+
+    {{ include('procuration/_delete_form.html.twig') }}
+{% endblock %}

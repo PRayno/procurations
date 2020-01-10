@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New College{% endblock %}
+
+{% block body %}
+    <h2>Ajout d'un nouveau collège électoral</h2>
+
+    {{ include('college/_form.html.twig') }}
+
+    <a href="{{ path('college_index') }}" class="button button-uca-beige">Retour à la liste</a>
+{% endblock %}

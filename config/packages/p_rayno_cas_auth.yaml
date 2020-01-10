@@ -1,0 +1,5 @@
+p_rayno_cas_auth:
+    server_login_url: 'https://ent.uca.fr/cas/'
+    server_validation_url: 'https://ent.uca.fr/cas/serviceValidate'
+    server_logout_url: 'https://ent.uca.fr/cas/logout'
+    xml_namespace: 'cas'

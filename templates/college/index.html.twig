@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des collèges électoraux{% endblock %}
+
+{% block body %}
+
+    <h2>Collèges électoraux</h2>
+
+    <a href="{{ path('college_new') }}" class="button button-uca-blue">Ajouter un collège électoral</a>
+
+    {% if colleges|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Actif</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for college in colleges %}
+                <tr>
+                    <td>{{ college.nom }}</td>
+                    <td>{{ college.actif ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        <a href="{{ path('college_edit', {'id': college.id}) }}" class="button button-uca-beige">Editer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-red">Aucun collège électoral renseigné.</div>
+    {% endif %}
+
+
+{% endblock %}
